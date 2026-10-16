@@ -2,7 +2,7 @@
 
 [![OSINT Trace - Direct API (Recommended)](https://img.shields.io/badge/OSINT%20Trace-Direct%20API%20(Recommended)-00DF9A?style=for-the-badge&logo=shield)](https://osinttrace.com) [![API.Market](https://img.shields.io/badge/API.Market-8B5CF6?style=for-the-badge)](https://api.market/store/osint-trace-1/x-checker) [![RapidAPI](https://img.shields.io/badge/RapidAPI-black?style=for-the-badge&logo=rapidapi)](https://rapidapi.com/osint-org-osint-org-default/api/x-checker)
 
-An enterprise-grade OSINT API to verify X (formerly Twitter) account existence and retrieve rich profile intelligence (account creation date, follower/following statistics, biography, avatar photos, verification badges, custom avatar flags, and direct profile URLs) by username or email address.
+An enterprise-grade OSINT API to verify X (formerly Twitter) account existence and retrieve rich profile intelligence (account creation date, follower/following statistics, biography, avatar photos, verification badges, custom avatar flags, and direct profile URLs) by username, email address, or phone number.
 
 ## Table of Contents
 - [Features](#features)
@@ -24,7 +24,7 @@ An enterprise-grade OSINT API to verify X (formerly Twitter) account existence a
 ## Features
 
 ✅ **Instant Verification**: Real-time presence verification for X / Twitter profiles.  
-✅ **Multi-Identifier Input**: Query using usernames or email addresses.  
+✅ **Multi-Identifier Input**: Query using usernames, email addresses, or phone numbers (international E.164 format).  
 ✅ **Deep Metadata Extraction**: Returns display names, handles, biographies, follower & following counts, account creation date (`created_at`), verified status badges, custom avatar indicators, and profile URLs.  
 ✅ **High Performance**: Asynchronous architecture with high-speed proxy cycling and anti-bot bypass.  
 ✅ **Developer-Friendly**: Available via direct REST API on [OSINT Trace](https://osinttrace.com) (Recommended) and major developer marketplaces.
@@ -58,10 +58,17 @@ Authentication headers and endpoints vary by provider:
 **Endpoint (OSINT Trace Direct - Recommended):**
 > `POST https://api.osinttrace.com/v1/check/x`
 
-**Request Body:**
+**Request Body (Username or Email):**
 ```json
 {
   "input": "target_handle"
+}
+```
+
+**Request Body (Phone Number):**
+```json
+{
+  "input": "+14155552671"
 }
 ```
 
@@ -71,11 +78,19 @@ Authentication headers and endpoints vary by provider:
 <summary><b>OSINT Trace Direct API (cURL) — Recommended</b></summary>
 
 ```bash
+# Verify by Username or Email
 curl --request POST \
      --url https://api.osinttrace.com/v1/check/x \
      --header 'x-osint-key: YOUR_OSINT_KEY' \
      --header 'Content-Type: application/json' \
      --data '{"input": "target_handle"}'
+
+# Verify by Phone Number (E.164 format)
+curl --request POST \
+     --url https://api.osinttrace.com/v1/check/x \
+     --header 'x-osint-key: YOUR_OSINT_KEY' \
+     --header 'Content-Type: application/json' \
+     --data '{"input": "+14155552671"}'
 ```
 </details>
 
@@ -87,7 +102,7 @@ curl --request POST \
      --url https://prod.api.market/api/v1/osint-trace-1/x-checker/check/x \
      --header 'X-Api-Key: YOUR_API_KEY' \
      --header 'Content-Type: application/json' \
-     --data '{"input": "target_handle"}'
+     --data '{"input": "+14155552671"}'
 ```
 </details>
 
@@ -100,7 +115,7 @@ curl --request POST \
      --header 'X-RapidAPI-Host: x-checker.p.rapidapi.com' \
      --header 'X-RapidAPI-Key: YOUR_API_KEY' \
      --header 'Content-Type: application/json' \
-     --data '{"input": "target_handle"}'
+     --data '{"input": "+14155552671"}'
 ```
 </details>
 
@@ -160,6 +175,7 @@ curl --request POST \
 - **Supported input formats**:
   - Usernames / handles (`target_handle`)
   - Email addresses (`user@example.com`)
+  - Phone numbers in international standard E.164 format (`+14155552671`, `+212612423061`)
 - **Rate Limit**: 1 request per second per active API key.
 
 ---

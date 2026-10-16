@@ -15,6 +15,7 @@ headers = {
 # url = "https://x-checker.p.rapidapi.com/check"
 # headers = {"x-rapidapi-key": "YOUR_RAPIDAPI_KEY", "x-rapidapi-host": "x-checker.p.rapidapi.com", "Content-Type": "application/json"}
 
+# Supports username ("target_handle"), email ("user@example.com"), or E.164 phone ("+14155552671")
 payload = {"input": "target_handle"}
 
 response = requests.post(url, json=payload, headers=headers)
