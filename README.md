@@ -25,7 +25,7 @@ An enterprise-grade OSINT API to verify X (formerly Twitter) account existence a
 
 ✅ **Instant Verification**: Real-time presence verification for X / Twitter profiles.  
 ✅ **Multi-Identifier Input**: Query using usernames, email addresses, or phone numbers (international E.164 format).  
-✅ **Deep Metadata Extraction**: Returns display names, handles, biographies, follower & following counts, account creation date (`created_at`), verified status badges, custom avatar indicators, and profile URLs.  
+✅ **Deep Metadata Extraction**: Returns display names, usernames, biographies, follower & following counts, account creation date (`created_at`), verified status badges, custom avatar indicators, and profile URLs.  
 ✅ **High Performance**: Asynchronous architecture with high-speed proxy cycling and anti-bot bypass.  
 ✅ **Developer-Friendly**: Available via direct REST API on [OSINT Trace](https://osinttrace.com) (Recommended) and major developer marketplaces.
 
@@ -61,7 +61,7 @@ Authentication headers and endpoints vary by provider:
 **Request Body (Username or Email):**
 ```json
 {
-  "input": "target_handle"
+  "input": "target_user"
 }
 ```
 
@@ -83,7 +83,7 @@ curl --request POST \
      --url https://api.osinttrace.com/v1/check/x \
      --header 'x-osint-key: YOUR_OSINT_KEY' \
      --header 'Content-Type: application/json' \
-     --data '{"input": "target_handle"}'
+     --data '{"input": "target_user"}'
 
 # Verify by Phone Number (E.164 format)
 curl --request POST \
@@ -173,7 +173,7 @@ curl --request POST \
 
 - **Minimum input length**: 3 characters
 - **Supported input formats**:
-  - Usernames / handles (`target_handle`)
+  - Usernames (`target_user`)
   - Email addresses (`user@example.com`)
   - Phone numbers in international standard E.164 format (`+14155552671`, `+212612423061`)
 - **Rate Limit**: 1 request per second per active API key.
