@@ -4,7 +4,12 @@
 
 An enterprise-grade OSINT API to verify X (formerly Twitter) account existence and retrieve rich profile intelligence (account creation date, follower/following statistics, biography, avatar photos, verification badges, custom avatar flags, and direct profile URLs) by username, email address, or phone number.
 
-## Table of Contents
+> ⚠️ **Metadata Availability & Privacy Notice**:
+> Extracted metadata is **conditional and never guaranteed**. Availability strictly depends on:
+> 1. **Input Format**: Username queries inspect public profiles to extract audience metrics (`followers`, `following`), account age (`created_at`), biography, and verification status. Phone number queries perform high-speed carrier pre-auth verification to confirm whether the number is registered on X, returning presence confirmation only (`live: true/false`, without profile metadata). Email queries verify registration presence and attach profile data if the handle matches the email prefix.
+> 2. **Platform & Privacy Settings**: Suspended, protected (private), or deactivated accounts may omit public attributes.
+
+---
 - [Features](#features)
 - [Getting Started](#getting-started)
   - [1. Get API Key](#1-get-api-key)
@@ -125,7 +130,7 @@ curl --request POST \
 
 ## Response Format
 
-### Account Found (With Metadata)
+### 1. Account Found via Username (Full Profile Metadata)
 ```json
 {
   "live": true,
@@ -145,7 +150,15 @@ curl --request POST \
 }
 ```
 
-### Account Not Found
+### 2. Account Found via Phone Number (Presence Verification)
+```json
+{
+  "live": true,
+  "note": null
+}
+```
+
+### 3. Account Not Found
 ```json
 {
   "live": false,
